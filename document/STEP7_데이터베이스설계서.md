@@ -219,8 +219,7 @@ CREATE TABLE social_accounts (
   provider_user_id  VARCHAR(100) NOT NULL,
   connected_at      DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (social_account_id),
-  UNIQUE KEY uq_social_provider (provider, provider_user_id),
-  CONSTRAINT fk_social_user FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE
+  UNIQUE KEY uq_social_provider (provider, provider_user_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE emotions (
@@ -259,9 +258,6 @@ CREATE TABLE transactions (
   KEY idx_tx_user_occurred (user_id, occurred_at),
   KEY idx_tx_user_emotion (user_id, emotion_id),
   KEY idx_tx_user_category (user_id, category_id),
-  CONSTRAINT fk_tx_user FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE,
-  CONSTRAINT fk_tx_emotion FOREIGN KEY (emotion_id) REFERENCES emotions (emotion_id),
-  CONSTRAINT fk_tx_category FOREIGN KEY (category_id) REFERENCES categories (category_id),
   CONSTRAINT chk_tx_amount CHECK (amount > 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -279,9 +275,25 @@ CREATE TABLE goals (
   updated_at     DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (goal_id),
   KEY idx_goals_user_main (user_id, is_main),
-  CONSTRAINT fk_goal_user FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE,
   CONSTRAINT chk_goal_amount CHECK (target_amount > 0 AND current_amount >= 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+```
+
+### 7-1. 외래키(FK) 제약조건 추가 스크립트 (운영 전환 시 주입용)
+
+> 데이터베이스 초기 구성의 유연성과 빠른 스키마 마이그레이션을 위해 테이블 생성 시 FK 제약조건은 제외하고, 추후 데이터 안정화 및 무결성 강화가 필요한 시점에 아래 스크립트를 통해 일괄 주입합니다.
+
+```sql
+ALTER TABLE social_accounts 
+  ADD CONSTRAINT fk_social_user FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE;
+
+ALTER TABLE transactions 
+  ADD CONSTRAINT fk_tx_user FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE,
+  ADD CONSTRAINT fk_tx_emotion FOREIGN KEY (emotion_id) REFERENCES emotions (emotion_id) ON DELETE RESTRICT,
+  ADD CONSTRAINT fk_tx_category FOREIGN KEY (category_id) REFERENCES categories (category_id) ON DELETE RESTRICT;
+
+ALTER TABLE goals 
+  ADD CONSTRAINT fk_goal_user FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE;
 ```
 
 > 분석·운영 테이블(monthly_summaries, ai_insights, notification_settings, terms_agreements, refresh_tokens)의 DDL은 2~4절 정의를 그대로 옮겨 작성한다 (동일 패턴).
