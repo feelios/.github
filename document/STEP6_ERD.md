@@ -217,7 +217,7 @@ erDiagram
 | situations | situation_id | — | `name` UNIQUE | — |
 | transaction_situations | transaction_situation_id | transaction_id → transactions, situation_id → situations | `(transaction_id, situation_id)` UNIQUE | — |
 | monthly_summaries | summary_id | user_id → users | `(user_id, year, month)` UNIQUE | — |
-| ai_insights | insight_id | user_id → users | — | insight_type ∈ {HOME, MONTHLY, WARNING 등} |
+| ai_insights | insight_id | user_id → users | — | insight_type ∈ {HOME, MONTHLY} |
 | notification_settings | notification_setting_id | user_id → users | `user_id` UNIQUE (1:1) | — |
 | terms_agreements | agreement_id | user_id → users | — | terms_type ∈ {SERVICE, PRIVACY, MARKETING} |
 | refresh_tokens | token_id | user_id → users | `token_hash` UNIQUE | — |

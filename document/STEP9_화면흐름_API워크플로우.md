@@ -70,7 +70,7 @@
 ### 화면 흐름
 1. LoginPage 진입 → 히어로 슬라이드 자동 재생.
 2. 소셜 버튼 클릭 → OAuth 인증 (방식: 프론트 SDK vs 서버 콜백 — STEP 8 확인 항목 #2, 추가 정의 필요).
-3. `POST /api/auth/login` → accessToken·refreshToken 저장, user(닉네임·프로필 이미지·onboardingDone) 수신. //메디스 db에 넣어서 
+3. `POST /api/auth/login` → accessToken·refreshToken 저장, user(닉네임·프로필 이미지·onboardingDone) 수신.
 4. 신규 사용자면 서버가 users + social_accounts + notification_settings 기본값 + terms_agreements 생성 (STEP 8 4-1).
 5. onboardingDone 분기 → OnboardingPage 또는 HomePage.
 
@@ -178,7 +178,7 @@ transactions, transaction_situations(집계 시), emotions, goals, monthly_summa
 | 기능 | 사용자 행동 | 프론트 처리 | 필요 API | 성공 시 도달 상태 | 실패 시 처리 |
 |---|---|---|---|---|---|
 | 입력 폼 렌더 | 화면 진입 | 감정·카테고리·상황 선택지 렌더. **[현재: 하드코딩 상수]** | GET /api/meta (캐시 재사용) | 폼 표시 | meta 실패 시 입력 불가 안내 + 재시도 |
-| 지출/수입 토글·금액·감정·카테고리·상황·메모·일시 입력 | 각 요소 선택/입력 | 로컬 폼 상태 🔄. 금액 정규식(0 초과 정수), 메모 500자 제한·살균(STEP 5 보완). 필수 3종 충족 시 저장 버튼 활성 | 없음 | 같은 화면 | 인라인 검증 안내 |
+| 지출/수입 토글·금액·감정·카테고리·상황·메모·일시 입력 | 각 요소 선택/입력 | 로컬 폼 상태 🔄. 금액 정규식(0 초과 정수), 메모 200자 제한·살균(STEP 5 보완). 필수 3종 충족 시 저장 버튼 활성 | 없음 | 같은 화면 | 인라인 검증 안내 |
 | 기록 저장 | "감정 기록 저장하기" 클릭 | 버튼 Disabled+로딩 → 저장 → 성공 시 토스트·폼 초기화·홈 선택 날짜 갱신(로컬 상태). **[현재: 로컬 `addTransaction()` — 상황 첫 값만 저장(교체 대상)]** | POST /api/transactions (emotionId, categoryId, situationIds[], …) | 같은 화면 유지 (🔄 폼 리셋). ♻️ 무효화: transactions 목록, summary/calendar, summary/emotions, analysis | 400: 인라인 안내. 네트워크: "네트워크 연결이 불안정합니다" 토스트, 입력값 보존 |
 
 ### 화면 흐름

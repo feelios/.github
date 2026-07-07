@@ -145,7 +145,7 @@
 | ai_insights | user_id | BIGINT | N | Y | N | — | 사용자 |
 | ai_insights | year | INT | N | N | N | — | 기준 연도 |
 | ai_insights | month | INT | N | N | N | — | 기준 월 |
-| ai_insights | insight_type | VARCHAR(20) | N | N | N | — | HOME / MONTHLY / WARNING |
+| ai_insights | insight_type | VARCHAR(20) | N | N | N | — | HOME / MONTHLY |
 | ai_insights | content | VARCHAR(500) | N | N | N | — | 생성 문장 |
 | ai_insights | created_at | DATETIME | N | N | N | CURRENT_TIMESTAMP | 생성 일시 |
 
