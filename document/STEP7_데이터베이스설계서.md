@@ -102,25 +102,6 @@
 | categories | sort_order | INT | N | N | N | 0 | 정렬 순서 |
 | categories | is_active | TINYINT(1) | N | N | N | 1 | 사용 여부 |
 
-### 3-3. `situations` — 상황 마스터
-
-| 테이블명 | 컬럼명 | 타입 | PK | FK | NULL | Default | 설명 |
-|---|---|---|---|---|---|---|---|
-| situations | situation_id | BIGINT | Y | N | N | AUTO_INCREMENT | 상황 ID |
-| situations | name | VARCHAR(30) | N | N | N | — | 상황명 (UNIQUE) |
-| situations | sort_order | INT | N | N | N | 0 | 정렬 순서 |
-| situations | is_active | TINYINT(1) | N | N | N | 1 | 사용 여부 |
-
-### 3-4. `transaction_situations` — 기록–상황 N:M 조인
-
-| 테이블명 | 컬럼명 | 타입 | PK | FK | NULL | Default | 설명 |
-|---|---|---|---|---|---|---|---|
-| transaction_situations | transaction_situation_id | BIGINT | Y | N | N | AUTO_INCREMENT | 조인 ID |
-| transaction_situations | transaction_id | BIGINT | N | Y | N | — | 기록 (transactions) |
-| transaction_situations | situation_id | BIGINT | N | Y | N | — | 상황 (situations) |
-
-> `(transaction_id, situation_id)` UNIQUE로 같은 상황 중복 부착 방지.
-
 ## 4. 테이블 정의서 — 분석 · 운영
 
 ### 4-1. `monthly_summaries` — 월별 집계 캐시
@@ -196,10 +177,6 @@
 | chk_goal_amount | goals | CHECK | target_amount > 0 AND current_amount >= 0 |
 | uq_emotion_name | emotions | UNIQUE | name |
 | uq_category_name_type | categories | UNIQUE | (name, type) |
-| uq_situation_name | situations | UNIQUE | name |
-| uq_tx_situation | transaction_situations | UNIQUE | (transaction_id, situation_id) |
-| fk_txs_tx | transaction_situations | FK | transaction_id → transactions, ON DELETE CASCADE |
-| fk_txs_situation | transaction_situations | FK | situation_id → situations, ON DELETE RESTRICT |
 | uq_summary | monthly_summaries | UNIQUE | (user_id, year, month) |
 | uq_noti_user | notification_settings | UNIQUE | user_id (1:1) |
 | uq_refresh_token | refresh_tokens | UNIQUE | token_hash |
@@ -214,7 +191,6 @@
 | idx_tx_user_emotion | transactions | (user_id, emotion_id) | **권장** — 감정별 조회·분포 |
 | idx_tx_user_category | transactions | (user_id, category_id) | 카테고리별 분석 |
 | idx_goals_user_main | goals | (user_id, is_main) | 대표 목표 조회 |
-| idx_txs_situation | transaction_situations | (situation_id) | 상황별 역조회 |
 | idx_ai_user_ym | ai_insights | (user_id, year, month) | 월별 인사이트 조회 |
 | idx_refresh_user | refresh_tokens | (user_id) | 사용자 토큰 조회·정리 |
 | (자동) | social_accounts, monthly_summaries, notification_settings | UNIQUE 인덱스 | 로그인·집계·설정 조회에 재사용 |
@@ -268,15 +244,6 @@ CREATE TABLE categories (
   UNIQUE KEY uq_category_name_type (name, type)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE situations (
-  situation_id BIGINT      NOT NULL AUTO_INCREMENT,
-  name         VARCHAR(30) NOT NULL,
-  sort_order   INT         NOT NULL DEFAULT 0,
-  is_active    TINYINT(1)  NOT NULL DEFAULT 1,
-  PRIMARY KEY (situation_id),
-  UNIQUE KEY uq_situation_name (name)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 CREATE TABLE transactions (
   transaction_id BIGINT       NOT NULL AUTO_INCREMENT,
   user_id        BIGINT       NOT NULL,
@@ -296,16 +263,6 @@ CREATE TABLE transactions (
   CONSTRAINT fk_tx_emotion FOREIGN KEY (emotion_id) REFERENCES emotions (emotion_id),
   CONSTRAINT fk_tx_category FOREIGN KEY (category_id) REFERENCES categories (category_id),
   CONSTRAINT chk_tx_amount CHECK (amount > 0)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE transaction_situations (
-  transaction_situation_id BIGINT NOT NULL AUTO_INCREMENT,
-  transaction_id           BIGINT NOT NULL,
-  situation_id             BIGINT NOT NULL,
-  PRIMARY KEY (transaction_situation_id),
-  UNIQUE KEY uq_tx_situation (transaction_id, situation_id),
-  CONSTRAINT fk_txs_tx FOREIGN KEY (transaction_id) REFERENCES transactions (transaction_id) ON DELETE CASCADE,
-  CONSTRAINT fk_txs_situation FOREIGN KEY (situation_id) REFERENCES situations (situation_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE goals (
@@ -335,18 +292,14 @@ CREATE TABLE goals (
 
 신남 · 설렘 · 뿌듯함 · 스트레스 · 외로움 · 화남 · 평온 · 무덤덤 (각 color·character_key·sort_order는 프론트 `src/data/emotions.js` 값을 이관)
 
-### 8-2. 카테고리 (categories) — 초안, 팀 확정 필요
+### 8-2. 카테고리 (categories) — 확정됨
 
 | type | 시드 |
 |---|---|
-| EXPENSE | 식비, 배달, 카페, 교통, 쇼핑, 문화, 건강, 기타 |
-| INCOME | 급여, 용돈, 기타 |
+| EXPENSE | 식비, 배달, 마트/편의점, 패션/미용, 주거/통신, 문화/취미, 구독료, 생활용품, 사회생활, 보험, 세금, 차량/교통, 저축 |
+| INCOME | 월급, 금융소득, 용돈, 더치페이, 환급금 |
 
-> 화면 간 불일치(STEP 6 보완)로 초안 확정 제안. '행복' 카테고리는 성격 불명확으로 제외 — 확인 필요.
-
-### 8-3. 상황 (situations)
-
-퇴근 후, 혼자 있음, 친구와, 보상, 습관, 이동 중, 아침, 밤
+> 최신 앱 UI 기획에 맞춰 카테고리 목록이 확정되었습니다. (저축 포함)
 
 ## 9. 추가 제안 컬럼 (확정과 분리)
 
@@ -356,15 +309,14 @@ CREATE TABLE goals (
 | users | withdrawn_at | 탈퇴 시각 (유예·통계) | 탈퇴 정책 상세화 시 |
 | transactions | source | 기록 출처 (MANUAL / 자동 감지) | 자동 연동 로드맵 확정 시 |
 | goals | sort_order | 목표 정렬 | 목표 다건 관리 UI 시 |
-| emotions/categories/situations | user_id | 커스텀 태그 소유자 (기본=NULL) | 사용자 커스텀 허용 시 |
+| emotions/categories | user_id | 커스텀 태그 소유자 (기본=NULL) | 사용자 커스텀 허용 시 |
 
 ## 10. 보완 필요 사항
 
 | # | 항목 | 내용 |
 |---|---|---|
-| 1 | 카테고리 목록 확정 (팀) | 8-2절 초안 + '행복' 유지 여부 |
-| 2 | 마스터 값 저장 방식 | 감정·카테고리·상황명을 한글로 저장(현재 코드 일치). 다국어 요구 시 name 다국어 컬럼 재검토 |
-| 3 | 온보딩 기간 → due_date 계산 | 3·6·12·24개월 선택 → start_date + 기간 |
-| 4 | 대표 목표 교체 | is_main 변경 시 기존 해제+신규 지정 단일 트랜잭션 |
-| 5 | monthly_summaries 갱신 시점 | 기록 생성·수정·삭제 시 동기 갱신 vs 배치 — 트래픽 규모에 따라 결정 |
-| 6 | 시드 데이터 스크립트 | emotions·categories·situations 마스터 + 시연 계정 거래 시드 |
+| 1 | 마스터 값 저장 방식 | 감정·카테고리명을 한글로 저장(현재 코드 일치). 다국어 요구 시 name 다국어 컬럼 재검토 |
+| 2 | 온보딩 기간 → due_date 계산 | 3·6·12·24개월 선택 → start_date + 기간 |
+| 3 | 대표 목표 교체 | is_main 변경 시 기존 해제+신규 지정 단일 트랜잭션 |
+| 4 | monthly_summaries 갱신 시점 | 기록 생성·수정·삭제 시 동기 갱신 vs 배치 — 트래픽 규모에 따라 결정 |
+| 5 | 시드 데이터 스크립트 | emotions·categories 마스터 + 시연 계정 거래 시드 |
