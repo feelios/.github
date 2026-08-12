@@ -7,7 +7,7 @@
 **Feeling Input, Insight Output** — 소비 순간의 감정을 함께 기록하고,
 누적된 데이터로 개인의 소비 행동을 해석하는 **감정 기반 소비 인사이트 서비스**입니다.
 
-[프론트엔드](https://github.com/feelios/feelio-web) · [백엔드](https://github.com/feelios/feelio-api)
+[FRONT](https://github.com/feelios/feelio-web) · [BACK](https://github.com/feelios/feelio-api)
 
 </div>
 
@@ -130,9 +130,6 @@ Feelio는 소비 기록에 감정을 함께 연결하여,
 ---
 
 ## 팀원
-
-3인 팀입니다. **프론트엔드와 백엔드를 나누지 않고** 도메인 단위로 나눠,
-각자 **화면부터 API·SQL까지** 구현했습니다.
 
 <table>
 <tr>
