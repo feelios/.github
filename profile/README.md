@@ -1190,3 +1190,8 @@ git 입장에서는 "같은 위치에 다른 변경"이라 자동 병합이 불�
 | 설정 모달 (목표/예산 수정, 회원 관리 등) | 
 |:---:|
 | <img src="https://github.com/user-attachments/assets/95f179fe-90e4-497d-93b2-40179ec55875" height="230" /> |
+
+### 6. 모바일 반응형 뷰 (Mobile Responsive View)
+| 로그인 및 온보딩 | 메인 홈 | 수입/지출 및 AI | 평행우주 (테마) | 설정 모달 |
+|:---:|:---:|:---:|:---:|:---:|
+| <img src="https://github.com/user-attachments/assets/42f40d5f-06cd-4e9d-81b9-458942239c85" height="350" /> | <img src="https://github.com/user-attachments/assets/494015a0-2c4a-4957-9e71-8e46a4e08c59" height="350" /> | <img width="355" height="736" alt="Image" src="https://github.com/user-attachments/assets/2ab881af-2202-46a0-b919-1312c6658234" /> | <img src="https://github.com/user-attachments/assets/1c45b5e1-cfc3-4162-acce-ce3632240e1f" height="350" /> | <img src="https://github.com/user-attachments/assets/4c7a4f87-4311-4fae-bfdd-bf51d796e631" height="350" /> |
