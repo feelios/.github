@@ -1185,3 +1185,8 @@ git 입장에서는 "같은 위치에 다른 변경"이라 자동 병합이 불�
 | AI 감정소비 분석 (팩트 리포트 및 패턴) | 평행우주 (다크모드 등 테마 전환) |
 |:---:|:---:|
 | <img src="https://github.com/user-attachments/assets/2ad3ab4b-2062-4509-aed7-49771e1354ef" height="230" /> | <img src="https://github.com/user-attachments/assets/74f42af1-740a-41bc-bf60-2740cdb3c158" height="230" /> |
+
+### 5. 설정 및 부가 기능 (Settings & Options)
+| 설정 모달 (목표/예산 수정, 회원 관리 등) | 
+|:---:|
+| <img src="https://github.com/user-attachments/assets/95f179fe-90e4-497d-93b2-40179ec55875" height="230" /> |
