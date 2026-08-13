@@ -1164,3 +1164,25 @@ git 입장에서는 "같은 위치에 다른 변경"이라 자동 병합이 불�
 감정을 입력하면, 소비 인사이트가 출력됩니다.
 
 </div>
+
+## 📱 주요 화면 미리보기 (Screen Previews)
+
+### 1. 로그인 및 온보딩 (Login & Onboarding)
+| 카카오 로그인 | 구글 로그인 | 네이버 로그인 | 온보딩 (초기 설정) |
+|:---:|:---:|:---:|:---:|
+| <img src="https://github.com/user-attachments/assets/7577e292-d2cd-4350-9678-523068c41bf6" width="250" /> | <img src="https://github.com/user-attachments/assets/62883527-beda-4304-94e1-ef6273fd2e38" width="250" /> | <img src="https://github.com/user-attachments/assets/14ae06c0-3671-4b54-a951-157545e0c79d" width="250" /> | <img src="https://github.com/user-attachments/assets/cb6c2d2c-e767-4012-a1ff-d8d1d078d5d0" width="250" /> |
+
+### 2. 메인 대시보드 (Home & Character)
+| 홈 화면 (캘린더 및 소비 현황) | 다이내믹 말랑이 (최다 감정에 따른 표정 변화) |
+|:---:|:---:|
+| <img src="https://github.com/user-attachments/assets/0233053d-8f1e-4ed9-bf28-eb60ebaeb4fc" width="450" /> | <img src="https://github.com/user-attachments/assets/6b153f10-2ecf-47e3-9b1f-9db4c45c8c36" width="450" /> |
+
+### 3. 소비 기록 관리 (Transactions)
+| 지출/수입 등록 (감정 태그) | 상세 거래 내역 관리 |
+|:---:|:---:|
+| <img src="https://github.com/user-attachments/assets/077e9dbf-40cf-4753-8231-9db7e82fc053" width="450" /> | <img src="https://github.com/user-attachments/assets/6aa042a8-5a05-4e18-a9ef-7f87d5d07829" width="450" /> |
+
+### 4. AI 분석 및 테마 (AI Analysis & Theme)
+| AI 감정소비 분석 (팩트 리포트 및 패턴) | 평행우주 (다크모드 등 테마 전환) |
+|:---:|:---:|
+| <img src="https://github.com/user-attachments/assets/b7d72542-bd6f-4dca-9dec-0a70a3fc652a" width="450" /> | <img src="https://github.com/user-attachments/assets/c39533e4-fb0f-4feb-97cf-4e2f724dbbf2" width="450" /> |
