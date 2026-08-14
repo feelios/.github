@@ -630,6 +630,38 @@ erDiagram
 
 ## 화면 구현 및 코드 리뷰
 
+## 📱 주요 화면 미리보기 (Screen Previews)
+
+### 1. 로그인 및 온보딩 (Login & Onboarding)
+| 카카오 로그인 | 구글 로그인 | 네이버 로그인 | 온보딩 (초기 설정) |
+|:---:|:---:|:---:|:---:|
+| <img src="https://github.com/user-attachments/assets/da1f9a1c-7c3c-4993-9e2a-db41e9a5d30b" height="130" /> | <img src="https://github.com/user-attachments/assets/5b4b7fe5-3fea-4201-bb32-d401e5e1303e" height="130" /> | <img src="https://github.com/user-attachments/assets/cd4b7b1f-8cd3-436a-b48d-5f6ef169eb5b" height="130" /> | <img src="https://github.com/user-attachments/assets/cc39eb25-4fb6-4f05-9e9e-ae04d7b8b8d9" height="130" /> |
+
+### 2. 메인 대시보드 (Home & Character)
+| 홈 화면 (캘린더 및 소비 현황) | 다이내믹 말랑이 (최다 감정에 따른 표정 변화) |
+|:---:|:---:|
+| <img src="https://github.com/user-attachments/assets/280b3a8b-402f-492a-8706-17ac5caf5306" height="230" /> | <img src="https://github.com/user-attachments/assets/6e6cf934-ae89-481e-9ad0-1e7fb5f715fe" height="230" /> |
+
+### 3. 소비 기록 관리 (Transactions)
+| 지출/수입 등록 (감정 태그) | 상세 거래 내역 관리 |
+|:---:|:---:|
+| <img src="https://github.com/user-attachments/assets/3f668d8d-2498-43bd-8b81-6ce14bea6d31" height="230" /> | <img src="https://github.com/user-attachments/assets/870937bd-d975-4229-8e3b-f587b05ad8cf" height="230" /> |
+
+### 4. AI 분석 및 테마 (AI Analysis & Theme)
+| AI 감정소비 분석 (팩트 리포트 및 패턴) | 평행우주 (다크모드 등 테마 전환) |
+|:---:|:---:|
+| <img src="https://github.com/user-attachments/assets/2ad3ab4b-2062-4509-aed7-49771e1354ef" height="230" /> | <img src="https://github.com/user-attachments/assets/74f42af1-740a-41bc-bf60-2740cdb3c158" height="230" /> |
+
+### 5. 설정 및 부가 기능 (Settings & Options)
+| 설정 모달 (목표/예산 수정, 회원 관리 등) | 
+|:---:|
+| <img src="https://github.com/user-attachments/assets/95f179fe-90e4-497d-93b2-40179ec55875" height="230" /> |
+
+### 6. 모바일 반응형 뷰 (Mobile Responsive View)
+| 로그인 및 온보딩 | 메인 홈 | 수입/지출 및 AI | 평행우주 (테마) | 설정 모달 |
+|:---:|:---:|:---:|:---:|:---:|
+| <img src="https://github.com/user-attachments/assets/42f40d5f-06cd-4e9d-81b9-458942239c85" height="350" /> | <img src="https://github.com/user-attachments/assets/494015a0-2c4a-4957-9e71-8e46a4e08c59" height="350" /> | <img src="https://github.com/user-attachments/assets/2ab881af-2202-46a0-b919-1312c6658234" height="350" /> | <img src="https://github.com/user-attachments/assets/1c45b5e1-cfc3-4162-acce-ce3632240e1f" height="350" /> | <img src="https://github.com/user-attachments/assets/4c7a4f87-4311-4fae-bfdd-bf51d796e631" height="350" /> |
+<br/>
 핵심 기능 3가지를 **화면 → 프론트 → 백엔드 → SQL** 순으로 따라가며 정리했습니다.
 제목을 클릭하면 펼쳐집니다.
 
@@ -1164,34 +1196,3 @@ git 입장에서는 "같은 위치에 다른 변경"이라 자동 병합이 불�
 감정을 입력하면, 소비 인사이트가 출력됩니다.
 
 </div>
-## 📱 주요 화면 미리보기 (Screen Previews)
-
-### 1. 로그인 및 온보딩 (Login & Onboarding)
-| 카카오 로그인 | 구글 로그인 | 네이버 로그인 | 온보딩 (초기 설정) |
-|:---:|:---:|:---:|:---:|
-| <img src="https://github.com/user-attachments/assets/da1f9a1c-7c3c-4993-9e2a-db41e9a5d30b" height="130" /> | <img src="https://github.com/user-attachments/assets/5b4b7fe5-3fea-4201-bb32-d401e5e1303e" height="130" /> | <img src="https://github.com/user-attachments/assets/cd4b7b1f-8cd3-436a-b48d-5f6ef169eb5b" height="130" /> | <img src="https://github.com/user-attachments/assets/cc39eb25-4fb6-4f05-9e9e-ae04d7b8b8d9" height="130" /> |
-
-### 2. 메인 대시보드 (Home & Character)
-| 홈 화면 (캘린더 및 소비 현황) | 다이내믹 말랑이 (최다 감정에 따른 표정 변화) |
-|:---:|:---:|
-| <img src="https://github.com/user-attachments/assets/280b3a8b-402f-492a-8706-17ac5caf5306" height="230" /> | <img src="https://github.com/user-attachments/assets/6e6cf934-ae89-481e-9ad0-1e7fb5f715fe" height="230" /> |
-
-### 3. 소비 기록 관리 (Transactions)
-| 지출/수입 등록 (감정 태그) | 상세 거래 내역 관리 |
-|:---:|:---:|
-| <img src="https://github.com/user-attachments/assets/3f668d8d-2498-43bd-8b81-6ce14bea6d31" height="230" /> | <img src="https://github.com/user-attachments/assets/870937bd-d975-4229-8e3b-f587b05ad8cf" height="230" /> |
-
-### 4. AI 분석 및 테마 (AI Analysis & Theme)
-| AI 감정소비 분석 (팩트 리포트 및 패턴) | 평행우주 (다크모드 등 테마 전환) |
-|:---:|:---:|
-| <img src="https://github.com/user-attachments/assets/2ad3ab4b-2062-4509-aed7-49771e1354ef" height="230" /> | <img src="https://github.com/user-attachments/assets/74f42af1-740a-41bc-bf60-2740cdb3c158" height="230" /> |
-
-### 5. 설정 및 부가 기능 (Settings & Options)
-| 설정 모달 (목표/예산 수정, 회원 관리 등) | 
-|:---:|
-| <img src="https://github.com/user-attachments/assets/95f179fe-90e4-497d-93b2-40179ec55875" height="230" /> |
-
-### 6. 모바일 반응형 뷰 (Mobile Responsive View)
-| 로그인 및 온보딩 | 메인 홈 | 수입/지출 및 AI | 평행우주 (테마) | 설정 모달 |
-|:---:|:---:|:---:|:---:|:---:|
-| <img src="https://github.com/user-attachments/assets/42f40d5f-06cd-4e9d-81b9-458942239c85" height="350" /> | <img src="https://github.com/user-attachments/assets/494015a0-2c4a-4957-9e71-8e46a4e08c59" height="350" /> | <img src="https://github.com/user-attachments/assets/2ab881af-2202-46a0-b919-1312c6658234" height="350" /> | <img src="https://github.com/user-attachments/assets/1c45b5e1-cfc3-4162-acce-ce3632240e1f" height="350" /> | <img src="https://github.com/user-attachments/assets/4c7a4f87-4311-4fae-bfdd-bf51d796e631" height="350" /> |
